@@ -1,0 +1,77 @@
+.photo-options-modal {
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  padding: 50px 25px;
+  max-width: 550px;
+  max-height: 700px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.photo-info {
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  width: 90%;
+}
+
+.frame {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  overflow: hidden;
+  background-color: #ededed;
+}
+
+.photo-info input {
+  width: 100%;
+  height: 48px;
+  border: unset;
+  border-bottom: 1px solid black;
+  margin: 10px auto;
+  outline: 0;
+}
+
+.cta-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  width: 90%;
+}
+
+.cta-wrapper button {
+  width: 100%;
+  margin: 10px;
+}
+
+.cta-wrapper button.save-button {
+  color: white;
+  background-color: #3DDC97;
+}
+
+.cta-wrapper button.save-button:disabled {
+  color: rgb(211, 211, 211);
+  background-color: #f0f0f0;
+}
