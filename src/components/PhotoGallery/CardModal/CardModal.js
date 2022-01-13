@@ -24,9 +24,20 @@ const PhotoOptionsModal = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
+    if (isNew) {
+      setUrl("");
+      setTitle("");
+      return;
+    }
+
     initUrl && setUrl(initUrl);
     initTitle && setTitle(initTitle);
-  }, [initUrl, initTitle]);
+  }, [initUrl, initTitle, isNew]);
+
+  const resetModal = () => {
+    setSelectedPhoto({});
+    setErrorMessage("");
+  };
 
   const handleSubmit = () => {
     const isTitleChanged = initTitle !== title;
@@ -43,6 +54,16 @@ const PhotoOptionsModal = () => {
     }
 
     if (isNew) {
+      if (isUrlInPhotos(url, photos)) {
+        setErrorMessage(URL_EXIST);
+        return;
+      }
+
+      if (isTitleInPhotos(title, photos)) {
+        setErrorMessage(TITLE_EXIST);
+        return;
+      }
+
       setPhotos([
         new Photo({
           id,
@@ -51,7 +72,8 @@ const PhotoOptionsModal = () => {
         }),
         ...photos,
       ]);
-      setSelectedPhoto({});
+
+      resetModal();
       return;
     }
 
@@ -79,7 +101,7 @@ const PhotoOptionsModal = () => {
       })
     );
 
-    setSelectedPhoto({});
+    resetModal();
   };
 
   if (!id) {
@@ -107,7 +129,7 @@ const PhotoOptionsModal = () => {
           />
           <input type="text" placeholder="Id" disabled value={id} />
         </div>
-        {!!errorMessage && <p className="error">{errorMessage}</p>}
+        <p className="error">{!!errorMessage && errorMessage}</p>
         <div className="cta-wrapper">
           <button
             className="save-button"
@@ -115,7 +137,7 @@ const PhotoOptionsModal = () => {
             onClick={handleSubmit}>
             {SAVE_BUTTON}
           </button>
-          <button onClick={() => setSelectedPhoto({})}>{CANCEL_BUTTON}</button>
+          <button onClick={resetModal}>{CANCEL_BUTTON}</button>
         </div>
       </div>
       <div className="backdrop" />

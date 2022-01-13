@@ -75,3 +75,8 @@
   color: rgb(211, 211, 211);
   background-color: #f0f0f0;
 }
+
+.photo-options-modal .error {
+  height: 50px;
+  color: tomato;
+}
